@@ -10,7 +10,7 @@ namespace MyApiProject.Models
 {
     public class NorthwndContext : DbContext
     {
-       
+
 
         public NorthwndContext(DbContextOptions<NorthwndContext> options)
          : base(options)
@@ -21,5 +21,7 @@ namespace MyApiProject.Models
         // 假設你有一個 Products 資料表
         public DbSet<Product> Products { get; set; } = null!;
         public DbSet<Customers> Customers { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<ApiKey> ApiKeys { get; set; }
     }
 }

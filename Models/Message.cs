@@ -1,21 +1,19 @@
-﻿namespace MyApiProject.Models
+﻿using MyApiProject.Models;
+namespace MyApiProject.Models
 {
     public class Message
     {
-        public int Id { get; set; }
-        public string Title { get; set; } = string.Empty;
+        public string Title { get; set; }
+        public int code { get; set; }
 
         public Message() { }
-
-        public Message(int id, string title)
-        {
-            Id = id;
-            Title = title;
-        }
 
         public Message(string title)
         {
             Title = title;
         }
+        public string Status { get; set; }  // 狀態 (例如 Success, Error)
+        public string Info { get; set; }    // 附加訊息
     }
+
 }

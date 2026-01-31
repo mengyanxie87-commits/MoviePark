@@ -6,9 +6,26 @@ namespace MyApiProject.Models
     public class Customers
     {
         [Key]
-        public string CustomerId { get; set; } = string.Empty;
+        [MaxLength(5)]
+        [Required]
+        public string CustomerID { get; set; }
+
+        [Required]
+        [Column("CustomerName")]
+        public string Name { get; set; } = string.Empty;
+
+        [Column(name:"Address")]
+        public string? Address { get; set; } = string.Empty;
+
+        [Column(name:"Phone")]
+        public string? Phone { get; set; } = string.Empty;
+
+        [Required]
+        [Column("CompanyName")]
         public string CompanyName { get; set; } = string.Empty;
-        public string ContactName { get; set; } = string.Empty;
+        
+        [Required]
+        [Column("City")]
         public string City { get; set; } = string.Empty;
     }
 }

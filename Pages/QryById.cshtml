@@ -1,0 +1,58 @@
+﻿@page
+@{
+    ViewData["Title"] = "電影清單查詢-整合服務";
+    var findByIdURL = Url.Action("FindById", "CustomersController"); // 確保這裡的控制器名稱正確
+}
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script> <!-- 引入 Vue.js -->
+</head>
+<body>
+    <div id="app">
+        <fieldset>
+            <legend>電影清單查詢-整合服務</legend>
+            <div>
+                <label for="customerId">客戶編號</label>
+                <input type='text' id='customerId' v-model="customerID" />
+                <button v-on:click="fetchCustomer">查詢</button> <!-- 使用 v-on:click -->
+            </div>
+            <div v-if="message">{{ message }}</div>
+        </fieldset>
+    </div>
+
+    <script>
+        var byIdURL = '@Html.Raw(findByIdURL)';
+        const dataModel = {
+            customerID: "",
+            customers: [],
+            message: "",
+            findByIdURL: byIdURL,
+        }
+
+        const app = Vue.createApp({
+            data() {
+                return dataModel;
+            },
+            methods: {
+                fetchCustomer() {
+                    // 使用 fetch API 查詢客戶資料
+                    fetch(`${this.findByIdURL}?id=${this.customerID}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.customers = data; // 假設返回的資料格式
+                            this.message = "查詢成功！";
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            this.message = "查詢失敗！";
+                        });
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
